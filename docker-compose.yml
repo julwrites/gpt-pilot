@@ -3,13 +3,15 @@ services:
     gpt-pilot:
         environment:
             # OPENAI/AZURE/OPENROUTER
-            - ENDPOINT=OPENAI
-            - OPENAI_API_KEY=
+            - ENDPOINT=http://0.0.0.0:4000/chat/completions
+            - OPENAI_API_KEY=dummywhatever
+            # - ENDPOINT=OPENAI
+            # - OPENAI_API_KEY=
             # - AZURE_API_KEY=
             # - AZURE_ENDPOINT=
             # - OPENROUTER_API_KEY=
             # In case of Azure endpoint, change this to your deployed model name
-            - MODEL_NAME=gpt-4
+            - MODEL_NAME=ollama/swestral
             - MAX_TOKENS=8192
             - DATABASE_TYPE=postgres
             - DB_NAME=pilot
@@ -26,7 +28,7 @@ services:
             dockerfile: Dockerfile
         ports:
             - "7681:7681"
-            - "3000:3000"
+            - "4001:3000"
         depends_on:
             postgres:
                 condition: service_healthy
